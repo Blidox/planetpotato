@@ -1,1 +1,931 @@
+diff --git a/index.html b/index.html
+index 8b137891791fe96927ad78e64b0aad7bded08bdc..08342e917a988836e656a8b2332f1b514aaca100 100644
+--- a/index.html
++++ b/index.html
+@@ -1 +1,925 @@
++<!DOCTYPE html>
++<html lang="nl">
++  <head>
++    <meta charset="UTF-8" />
++    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
++    <title>Planeet Patat Forum</title>
++    <link rel="preconnect" href="https://fonts.googleapis.com" />
++    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
++    <link
++      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
++      rel="stylesheet"
++    />
++    <style>
++      :root {
++        color-scheme: light dark;
++        --bg: #0b0b11;
++        --bg-alt: #12121d;
++        --bg-card: rgba(18, 18, 29, 0.6);
++        --bg-card-strong: rgba(18, 18, 29, 0.85);
++        --primary: #ff955e;
++        --primary-strong: #ff7a32;
++        --primary-soft: rgba(255, 149, 94, 0.12);
++        --accent: #7f6aff;
++        --text: #f6f6f9;
++        --text-muted: #b3b4c1;
++        --border: rgba(255, 255, 255, 0.08);
++        --shadow: 0 20px 50px rgba(15, 15, 25, 0.35);
++        font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
++      }
+ 
++      * {
++        box-sizing: border-box;
++      }
++
++      body {
++        margin: 0;
++        background: radial-gradient(circle at top left, rgba(127, 106, 255, 0.25), transparent 50%),
++          radial-gradient(circle at bottom right, rgba(255, 149, 94, 0.25), transparent 45%),
++          linear-gradient(180deg, var(--bg) 0%, #07070c 100%);
++        color: var(--text);
++      }
++
++      header {
++        backdrop-filter: blur(16px);
++        background: rgba(7, 7, 12, 0.6);
++        position: sticky;
++        top: 0;
++        z-index: 100;
++        border-bottom: 1px solid var(--border);
++      }
++
++      nav {
++        margin: 0 auto;
++        padding: 1.2rem clamp(1rem, 4vw, 3rem);
++        display: flex;
++        align-items: center;
++        justify-content: space-between;
++        max-width: 1200px;
++      }
++
++      .brand {
++        display: flex;
++        align-items: center;
++        gap: 0.75rem;
++        font-weight: 700;
++        letter-spacing: -0.02em;
++      }
++
++      .brand span {
++        font-size: 1.2rem;
++      }
++
++      .brand-logo {
++        display: grid;
++        place-items: center;
++        width: 42px;
++        height: 42px;
++        background: linear-gradient(135deg, var(--primary), var(--accent));
++        border-radius: 12px;
++        font-size: 1.35rem;
++        font-weight: 800;
++        color: #0b0b11;
++        box-shadow: 0 12px 24px rgba(255, 149, 94, 0.25);
++      }
++
++      .nav-links {
++        display: flex;
++        gap: 1.5rem;
++        align-items: center;
++      }
++
++      .nav-links a {
++        color: var(--text-muted);
++        text-decoration: none;
++        font-weight: 500;
++        transition: color 0.2s ease;
++      }
++
++      .nav-links a:hover,
++      .nav-links a:focus-visible {
++        color: var(--text);
++      }
++
++      .cta-button {
++        padding: 0.7rem 1.4rem;
++        border-radius: 999px;
++        background: linear-gradient(135deg, var(--primary-strong), var(--accent));
++        border: none;
++        color: #0b0b11;
++        font-weight: 700;
++        cursor: pointer;
++        box-shadow: 0 16px 40px rgba(127, 106, 255, 0.3);
++        transition: transform 0.2s ease, box-shadow 0.2s ease;
++      }
++
++      .cta-button:hover,
++      .cta-button:focus-visible {
++        transform: translateY(-2px);
++        box-shadow: 0 24px 50px rgba(127, 106, 255, 0.35);
++      }
++
++      main {
++        max-width: 1200px;
++        margin: 0 auto;
++        padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 3rem) 6rem;
++        display: flex;
++        flex-direction: column;
++        gap: clamp(3rem, 7vw, 5rem);
++      }
++
++      .hero {
++        display: grid;
++        gap: 2.5rem;
++        align-items: center;
++        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
++        background: linear-gradient(145deg, rgba(18, 18, 29, 0.85), rgba(18, 18, 29, 0.5));
++        border-radius: 28px;
++        padding: clamp(2.5rem, 6vw, 4rem);
++        box-shadow: var(--shadow);
++        position: relative;
++        overflow: hidden;
++      }
++
++      .hero::after {
++        content: "";
++        position: absolute;
++        inset: 0;
++        background: radial-gradient(circle at 30% 20%, rgba(255, 149, 94, 0.35), transparent 50%),
++          radial-gradient(circle at 80% 50%, rgba(127, 106, 255, 0.35), transparent 55%);
++        pointer-events: none;
++        mix-blend-mode: screen;
++      }
++
++      .hero-text h1 {
++        font-size: clamp(2.5rem, 5vw, 3.8rem);
++        margin: 0 0 1rem;
++        line-height: 1.1;
++        letter-spacing: -0.03em;
++      }
++
++      .hero-text p {
++        margin: 0 0 1.6rem;
++        color: var(--text-muted);
++        max-width: 36ch;
++        font-size: 1.05rem;
++        line-height: 1.6;
++      }
++
++      .hero-stats {
++        display: flex;
++        gap: 1.5rem;
++        flex-wrap: wrap;
++      }
++
++      .stat-card {
++        background: var(--bg-card-strong);
++        padding: 1rem 1.2rem;
++        border-radius: 16px;
++        border: 1px solid var(--border);
++        flex: 1;
++        min-width: 160px;
++      }
++
++      .stat-card strong {
++        display: block;
++        font-size: 1.7rem;
++        font-weight: 700;
++      }
++
++      .stat-card span {
++        color: var(--text-muted);
++        font-size: 0.95rem;
++      }
++
++      .card-grid {
++        display: grid;
++        gap: 1.8rem;
++        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
++      }
++
++      section h2 {
++        margin: 0 0 1.2rem;
++        font-size: clamp(1.9rem, 4vw, 2.6rem);
++        letter-spacing: -0.02em;
++      }
++
++      section > p {
++        margin: 0 0 2.2rem;
++        color: var(--text-muted);
++        max-width: 60ch;
++      }
++
++      .category-card,
++      .thread-card,
++      .resource-card {
++        background: var(--bg-card);
++        border: 1px solid var(--border);
++        padding: 1.6rem;
++        border-radius: 20px;
++        backdrop-filter: blur(18px);
++        position: relative;
++        overflow: hidden;
++        transition: transform 0.2s ease, border-color 0.2s ease;
++      }
++
++      .category-card::before,
++      .thread-card::before,
++      .resource-card::before {
++        content: "";
++        position: absolute;
++        inset: 0;
++        opacity: 0;
++        background: radial-gradient(circle at top left, rgba(255, 149, 94, 0.4), transparent 60%);
++        transition: opacity 0.3s ease;
++      }
++
++      .category-card:hover::before,
++      .thread-card:hover::before,
++      .resource-card:hover::before,
++      .category-card:focus-within::before,
++      .thread-card:focus-within::before,
++      .resource-card:focus-within::before {
++        opacity: 1;
++      }
++
++      .category-card:hover,
++      .thread-card:hover,
++      .resource-card:hover,
++      .category-card:focus-within,
++      .thread-card:focus-within,
++      .resource-card:focus-within {
++        transform: translateY(-4px);
++        border-color: rgba(255, 149, 94, 0.4);
++      }
++
++      .category-card h3,
++      .thread-card h3,
++      .resource-card h3 {
++        margin: 0 0 0.9rem;
++        font-size: 1.2rem;
++      }
++
++      .category-card p,
++      .thread-card p,
++      .resource-card p {
++        margin: 0;
++        color: var(--text-muted);
++        line-height: 1.5;
++      }
++
++      .thread-meta,
++      .category-meta {
++        display: flex;
++        gap: 1rem;
++        flex-wrap: wrap;
++        margin-top: 1.1rem;
++        color: var(--text-muted);
++        font-size: 0.9rem;
++      }
++
++      .thread-meta span,
++      .category-meta span {
++        display: inline-flex;
++        align-items: center;
++        gap: 0.4rem;
++        background: rgba(255, 149, 94, 0.1);
++        color: var(--primary);
++        border-radius: 999px;
++        padding: 0.4rem 0.75rem;
++      }
++
++      .topic-label {
++        display: inline-flex;
++        align-items: center;
++        gap: 0.4rem;
++        border-radius: 999px;
++        padding: 0.35rem 0.75rem;
++        font-size: 0.85rem;
++        color: var(--primary);
++        background: var(--primary-soft);
++        margin-bottom: 0.75rem;
++      }
++
++      .thread-card .author {
++        margin-top: 1.4rem;
++        display: flex;
++        align-items: center;
++        gap: 0.8rem;
++      }
++
++      .author-avatar {
++        width: 42px;
++        height: 42px;
++        border-radius: 12px;
++        background: linear-gradient(135deg, rgba(127, 106, 255, 0.8), rgba(255, 149, 94, 0.8));
++        display: grid;
++        place-items: center;
++        font-weight: 700;
++        color: #0b0b11;
++      }
++
++      .author-info span:first-child {
++        font-weight: 600;
++      }
++
++      .author-info span:last-child {
++        color: var(--text-muted);
++        font-size: 0.85rem;
++      }
++
++      .discussion-highlights {
++        display: grid;
++        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
++        gap: 1.6rem;
++        margin-top: 2rem;
++      }
++
++      .highlight-card {
++        padding: 1.4rem 1.6rem;
++        background: rgba(18, 18, 29, 0.75);
++        border-radius: 18px;
++        border: 1px solid rgba(255, 255, 255, 0.06);
++        display: grid;
++        gap: 0.6rem;
++      }
++
++      .highlight-card strong {
++        font-size: 1rem;
++      }
++
++      .timeline {
++        background: var(--bg-card);
++        border-radius: 24px;
++        border: 1px solid var(--border);
++        padding: 2rem;
++        display: grid;
++        gap: 1.6rem;
++      }
++
++      .timeline-step {
++        display: flex;
++        gap: 1.2rem;
++      }
++
++      .timeline-bullet {
++        width: 36px;
++        height: 36px;
++        border-radius: 12px;
++        background: rgba(127, 106, 255, 0.2);
++        color: var(--accent);
++        display: grid;
++        place-items: center;
++        font-weight: 700;
++        flex-shrink: 0;
++      }
++
++      .timeline-content h4 {
++        margin: 0 0 0.4rem;
++        font-size: 1.05rem;
++      }
++
++      .timeline-content p {
++        margin: 0;
++        color: var(--text-muted);
++      }
++
++      .callout {
++        margin-top: 2.5rem;
++        padding: clamp(1.5rem, 4vw, 2.4rem);
++        border-radius: 22px;
++        background: linear-gradient(135deg, rgba(255, 149, 94, 0.18), rgba(127, 106, 255, 0.18));
++        border: 1px solid rgba(255, 255, 255, 0.12);
++        display: grid;
++        gap: 1rem;
++      }
++
++      .callout strong {
++        font-size: 1.2rem;
++      }
++
++      .newsletter {
++        display: grid;
++        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
++        gap: 1rem;
++        margin-top: 1rem;
++      }
++
++      .newsletter input {
++        border-radius: 999px;
++        border: 1px solid var(--border);
++        padding: 0.85rem 1.1rem;
++        background: rgba(7, 7, 12, 0.75);
++        color: var(--text);
++      }
++
++      .newsletter input::placeholder {
++        color: rgba(255, 255, 255, 0.45);
++      }
++
++      .sr-only {
++        position: absolute;
++        width: 1px;
++        height: 1px;
++        padding: 0;
++        margin: -1px;
++        overflow: hidden;
++        clip: rect(0, 0, 0, 0);
++        border: 0;
++      }
++
++      .events {
++        display: grid;
++        gap: 1.6rem;
++        margin-top: 1.8rem;
++      }
++
++      .event-card {
++        display: grid;
++        grid-template-columns: 120px 1fr;
++        gap: 1.4rem;
++        align-items: center;
++        background: rgba(18, 18, 29, 0.65);
++        border-radius: 18px;
++        border: 1px solid rgba(255, 255, 255, 0.08);
++        padding: 1.2rem 1.4rem;
++      }
++
++      .event-date {
++        display: grid;
++        place-items: center;
++        border-radius: 16px;
++        background: rgba(127, 106, 255, 0.2);
++        color: var(--accent);
++        font-weight: 600;
++        padding: 1rem;
++      }
++
++      .event-info h4 {
++        margin: 0 0 0.5rem;
++      }
++
++      .event-info p {
++        margin: 0;
++        color: var(--text-muted);
++      }
++
++      footer {
++        margin-top: 4rem;
++        border-top: 1px solid var(--border);
++        padding: 3rem clamp(1rem, 4vw, 3rem) 4rem;
++        background: rgba(7, 7, 12, 0.75);
++      }
++
++      .footer-grid {
++        max-width: 1200px;
++        margin: 0 auto;
++        display: grid;
++        gap: 2.2rem;
++        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
++      }
++
++      .footer-brand p {
++        color: var(--text-muted);
++        margin: 1rem 0 0;
++      }
++
++      .footer-links {
++        display: grid;
++        gap: 0.75rem;
++      }
++
++      .footer-links a {
++        color: var(--text-muted);
++        text-decoration: none;
++        font-size: 0.95rem;
++      }
++
++      .footer-links a:hover {
++        color: var(--text);
++      }
++
++      .copyright {
++        text-align: center;
++        color: rgba(255, 255, 255, 0.4);
++        font-size: 0.85rem;
++        margin-top: 2rem;
++      }
++
++      @media (max-width: 720px) {
++        .nav-links {
++          display: none;
++        }
++
++        .hero {
++          text-align: center;
++        }
++
++        .hero-text p {
++          margin-left: auto;
++          margin-right: auto;
++        }
++
++        .hero-stats {
++          justify-content: center;
++        }
++
++        .event-card {
++          grid-template-columns: 1fr;
++          text-align: center;
++        }
++
++        .timeline {
++          padding: 1.5rem;
++        }
++
++        .timeline-step {
++          flex-direction: column;
++          align-items: center;
++          text-align: center;
++        }
++
++        .timeline-bullet {
++          margin-bottom: 0.6rem;
++        }
++      }
++    </style>
++  </head>
++  <body>
++    <header>
++      <nav>
++        <div class="brand" aria-label="Planeet Patat">
++          <div class="brand-logo" aria-hidden="true">PP</div>
++          <span>Planeet Patat Forum</span>
++        </div>
++        <div class="nav-links">
++          <a href="#categorieen">Categorieën</a>
++          <a href="#discussies">Discussies</a>
++          <a href="#events">Events</a>
++          <a href="#join">Word lid</a>
++        </div>
++        <button class="cta-button">Start nieuwe discussie</button>
++      </nav>
++    </header>
++
++    <main>
++      <section class="hero" aria-labelledby="hero-heading">
++        <div class="hero-text">
++          <h1 id="hero-heading">Breng de Planeet Patat community samen</h1>
++          <p>
++            Welkom op het forum waar aardappel-avonturiers, ruimtepatatbakkers en
++            sci-fi snackfans elkaar ontmoeten. Deel ideeën, start een missie en vind
++            gelijkgestemde patatonauten.
++          </p>
++          <div class="hero-stats" aria-label="Community statistieken">
++            <div class="stat-card">
++              <strong>12.4k</strong>
++              <span>Actieve patatonauten</span>
++            </div>
++            <div class="stat-card">
++              <strong>3.2k</strong>
++              <span>Dagelijkse berichten</span>
++            </div>
++            <div class="stat-card">
++              <strong>42</strong>
++              <span>Intergalactische crews</span>
++            </div>
++          </div>
++        </div>
++        <div class="hero-media" aria-hidden="true">
++          <div class="discussion-highlights">
++            <div class="highlight-card">
++              <strong>🍟 Nieuwe missie</strong>
++              <span>"Welke kruidenmix werkt het best in microzwaartekracht?"</span>
++            </div>
++            <div class="highlight-card">
++              <strong>🪐 Crew gezocht</strong>
++              <span>"Zoektocht naar frietvrienden voor Mars habitat test"</span>
++            </div>
++            <div class="highlight-card">
++              <strong>🚀 Showcase</strong>
++              <span>"Presentatie: zelfgemaakte warp-frietpan"</span>
++            </div>
++          </div>
++        </div>
++      </section>
++
++      <section id="categorieen" aria-labelledby="categorieen-heading">
++        <h2 id="categorieen-heading">Populaire categorieën</h2>
++        <p>
++          Vind jouw squad in een van de favoriete landing zones van de community. Elke
++          categorie bevat wekelijkse challenges, live sessies en pinned tips om je
++          patatprojecten naar het volgende niveau te lanceren.
++        </p>
++        <div class="card-grid">
++          <article class="category-card">
++            <div class="topic-label">Strategie &amp; Lore</div>
++            <h3>Ruimtemissies plannen</h3>
++            <p>
++              Plan nieuwe veroveringen in het aardappelstelsel, deel missiedocumenten en
++              schrijf samen het volgende hoofdstuk van de Planeet Patat saga.
++            </p>
++            <div class="category-meta">
++              <span>1.8k threads</span>
++              <span>Live briefing elke woensdag</span>
++            </div>
++          </article>
++          <article class="category-card">
++            <div class="topic-label">Tech &amp; Tools</div>
++            <h3>Frietpan engineering</h3>
++            <p>
++              Van 3D-geprinte frituurroosters tot AI-snackbots: bouw en test technologie
++              voor de beste ruimtepatat ooit.
++            </p>
++            <div class="category-meta">
++              <span>2.3k threads</span>
++              <span>Community lab beschikbaar</span>
++            </div>
++          </article>
++          <article class="category-card">
++            <div class="topic-label">Creatief</div>
++            <h3>Concept art &amp; memes</h3>
++            <p>
++              Deel je kunst, fanfic of holografische memes. De beste creaties landen in de
++              wekelijkse hall of fries.
++            </p>
++            <div class="category-meta">
++              <span>980 threads</span>
++              <span>Vrijdag meme battle</span>
++            </div>
++          </article>
++          <article class="category-card">
++            <div class="topic-label">Community</div>
++            <h3>Meetups &amp; crewvorming</h3>
++            <p>
++              Start een lokale patat meetup of sluit aan bij een bestaande crew. Van VR
++              gamen tot echte frietsessies.
++            </p>
++            <div class="category-meta">
++              <span>640 threads</span>
++              <span>Ambassadeurs in 12 steden</span>
++            </div>
++          </article>
++        </div>
++      </section>
++
++      <section id="discussies" aria-labelledby="discussies-heading">
++        <h2 id="discussies-heading">Uitgelichte discussies</h2>
++        <p>
++          Stap binnen in lopende threads waar de community het meest actief is. Doe mee,
++          geef feedback of start jouw spin-off missie.
++        </p>
++        <div class="card-grid">
++          <article class="thread-card">
++            <div class="topic-label">Community bouw</div>
++            <h3>"Wat maakt een patatcrew succesvol?"</h3>
++            <p>
++              Een open brainstorm over de ingrediënten voor een hechte crew. Deel je
++              ervaringen met rituelen, onboarding en hoe je nieuwe leden laat schitteren.
++            </p>
++            <div class="thread-meta">
++              <span>128 reacties</span>
++              <span>Gestart door NovaNugget</span>
++            </div>
++            <div class="author">
++              <div class="author-avatar" aria-hidden="true">NN</div>
++              <div class="author-info">
++                <span>NovaNugget</span>
++                <span>Community architect • 2 uur geleden</span>
++              </div>
++            </div>
++          </article>
++          <article class="thread-card">
++            <div class="topic-label">Tech showcase</div>
++            <h3>"Mijn modulair frietstation"</h3>
++            <p>
++              Een fotoreportage van een volledig modulair frietstation met duurzame olie
++              recyclers en LED-gloed voor extra sfeer.
++            </p>
++            <div class="thread-meta">
++              <span>86 reacties</span>
++              <span>Gestart door OrbitOven</span>
++            </div>
++            <div class="author">
++              <div class="author-avatar" aria-hidden="true">OO</div>
++              <div class="author-info">
++                <span>OrbitOven</span>
++                <span>Hardware engineer • 6 uur geleden</span>
++              </div>
++            </div>
++          </article>
++          <article class="thread-card">
++            <div class="topic-label">Creatief</div>
++            <h3>"Soundtrack voor de volgende patat opera"</h3>
++            <p>
++              Samen een soundtrack componeren voor de ultieme aardappel opera. Deel riffs,
++              synth presets en AI-vocalen.
++            </p>
++            <div class="thread-meta">
++              <span>142 reacties</span>
++              <span>Gestart door SynthSpud</span>
++            </div>
++            <div class="author">
++              <div class="author-avatar" aria-hidden="true">SS</div>
++              <div class="author-info">
++                <span>SynthSpud</span>
++                <span>Sound designer • 1 dag geleden</span>
++              </div>
++            </div>
++          </article>
++        </div>
++        <div class="callout">
++          <strong>👉 Tip voor nieuwe leden</strong>
++          <span>
++            Stel jezelf voor in het thread "Nieuw in de melkweg" en ontvang een
++            welkomstpakket vol geheime frietkruiden.
++          </span>
++        </div>
++      </section>
++
++      <section aria-labelledby="resources-heading">
++        <h2 id="resources-heading">Community resources</h2>
++        <p>
++          Alles wat je nodig hebt om jouw bijdrage aan Planeet Patat te versnellen. Leer
++          van eerdere missies, bekijk templates en sluit je aan bij mentorprogramma's.
++        </p>
++        <div class="card-grid">
++          <article class="resource-card">
++            <h3>Starter kit voor nieuwe crews</h3>
++            <p>
++              Download onboarding docs, checklist voor crewrituelen en het community
++              charter.
++            </p>
++          </article>
++          <article class="resource-card">
++            <h3>Template bibliotheek</h3>
++            <p>
++              Plan posters, events en content met kant-en-klare templates ontworpen door de
++              community.
++            </p>
++          </article>
++          <article class="resource-card">
++            <h3>Mentor matching</h3>
++            <p>
++              Vind ervaren patatonauten die klaarstaan om je te coachen op strategie, tech
++              of storytelling.
++            </p>
++          </article>
++          <article class="resource-card">
++            <h3>Community analytics</h3>
++            <p>
++              Ontdek inzichten over engagement, groeipaden en succesverhalen van crews.
++            </p>
++          </article>
++        </div>
++      </section>
++
++      <section aria-labelledby="timeline-heading">
++        <h2 id="timeline-heading">Zo wordt jouw idee groot</h2>
++        <div class="timeline">
++          <div class="timeline-step">
++            <div class="timeline-bullet">1</div>
++            <div class="timeline-content">
++              <h4>Pitch je concept</h4>
++              <p>Maak een thread aan met je droom, geef context en tag je crewgenoten.</p>
++            </div>
++          </div>
++          <div class="timeline-step">
++            <div class="timeline-bullet">2</div>
++            <div class="timeline-content">
++              <h4>Verzamel feedback</h4>
++              <p>
++                Gebruik polls, design reviews en co-creatie sessies om je idee te finetunen.
++              </p>
++            </div>
++          </div>
++          <div class="timeline-step">
++            <div class="timeline-bullet">3</div>
++            <div class="timeline-content">
++              <h4>Launch met je crew</h4>
++              <p>
++                Plan een event, stel je planning op en promoot je project via de community.
++              </p>
++            </div>
++          </div>
++          <div class="timeline-step">
++            <div class="timeline-bullet">4</div>
++            <div class="timeline-content">
++              <h4>Vier de impact</h4>
++              <p>Deel resultaten, shout-outs en documenteer alles voor de archieven.</p>
++            </div>
++          </div>
++        </div>
++      </section>
++
++      <section id="events" aria-labelledby="events-heading">
++        <h2 id="events-heading">Komende community events</h2>
++        <p>
++          Reserveer je plek voor workshops, meetups en livestreams. Alle events worden ook
++          opgenomen voor leden die niet live kunnen deelnemen.
++        </p>
++        <div class="events">
++          <article class="event-card">
++            <div class="event-date">
++              <div>24</div>
++              <div>Feb</div>
++            </div>
++            <div class="event-info">
++              <h4>Zero-G friet testlab (livestream)</h4>
++              <p>
++                Live demo vanuit de Orbit Kitchen. Leer hoe onze patatonauten frituren in
++                gewichtloosheid.
++              </p>
++            </div>
++          </article>
++          <article class="event-card">
++            <div class="event-date">
++              <div>02</div>
++              <div>Mrt</div>
++            </div>
++            <div class="event-info">
++              <h4>Community roundtable: toekomst van Planeet Patat</h4>
++              <p>
++                We bespreken de roadmap, feedback en nieuwe crew voorstellen. Iedereen is
++                welkom.
++              </p>
++            </div>
++          </article>
++          <article class="event-card">
++            <div class="event-date">
++              <div>15</div>
++              <div>Mrt</div>
++            </div>
++            <div class="event-info">
++              <h4>Creatieve sprint: bouw een patatverhaal</h4>
++              <p>
++                Een 48-uurs challenge waarin teams een verhaal, soundtrack en visuals
++                maken.
++              </p>
++            </div>
++          </article>
++        </div>
++      </section>
++
++      <section id="join" aria-labelledby="join-heading">
++        <h2 id="join-heading">Sluit je aan bij de community</h2>
++        <p>
++          Krijg toegang tot besloten kanalen, community calls en exclusieve friet-merch. We
++          sturen je geen spam, alleen updates die het waard zijn.
++        </p>
++        <div class="callout">
++          <strong>Meld je aan voor de nieuwsbrief</strong>
++          <p>
++            Ontvang elke vrijdag een overzicht van topdiscussies, nieuwe events en crew
++            oproepen.
++          </p>
++          <form class="newsletter" action="#" method="post">
++            <label class="sr-only" for="email">E-mailadres</label>
++            <input
++              id="email"
++              type="email"
++              name="email"
++              placeholder="jij@planeetpatat.space"
++              required
++            />
++            <button type="submit" class="cta-button">Word lid</button>
++          </form>
++        </div>
++      </section>
++    </main>
++
++    <footer>
++      <div class="footer-grid">
++        <div class="footer-brand">
++          <div class="brand">
++            <div class="brand-logo" aria-hidden="true">PP</div>
++            <span>Planeet Patat</span>
++          </div>
++          <p>
++            Het intergalactische thuis voor frietdenkers, makers en dromers. Start vandaag
++            nog je volgende missie.
++          </p>
++        </div>
++        <div class="footer-links">
++          <strong>Community</strong>
++          <a href="#categorieen">Categorieën</a>
++          <a href="#discussies">Discussies</a>
++          <a href="#events">Events</a>
++        </div>
++        <div class="footer-links">
++          <strong>Resources</strong>
++          <a href="#">Wiki &amp; kennisbank</a>
++          <a href="#">Patat tools</a>
++          <a href="#">Crew manifest</a>
++        </div>
++        <div class="footer-links">
++          <strong>Volg ons</strong>
++          <a href="#">Holostream</a>
++          <a href="#">GalacticCast</a>
++          <a href="#">SpudGram</a>
++        </div>
++      </div>
++      <div class="copyright">© 2024 Planeet Patat. Alle rechten voorbehouden.</div>
++    </footer>
++  </body>
++</html>
 
